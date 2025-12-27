@@ -37,6 +37,14 @@
                         value="{{ old('description', $Blog->description) }}"
                         class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white">
                 </div>
+                <div class="mb-6">
+                    <label class="block text-sm text-white mb-2">Status *</label>
+                    <select name="status"
+                        class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white">
+                        <option value="draft" {{ old('status', $Blog->status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                        <option value="published" {{ old('status', $Blog->status) == 'published' ? 'selected' : '' }}>Published</option>
+                    </select>
+                </div>
 
                 <!-- Kategori -->
                 <div>

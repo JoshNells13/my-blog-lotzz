@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $Blog= Blog::all();
+        $Blog= Blog::where('status','published')->latest()->take(6)->get();
 
         $Categories= Category::all();
 

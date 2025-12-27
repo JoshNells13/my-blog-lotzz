@@ -46,25 +46,34 @@
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition">
                         </div>
 
-                        <!-- Kategori & Status -->
+                        <div class="mb-6">
+                            <label class="block text-sm text-white mb-2">Status *</label>
+                            <select name="status"
+                                class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white">
+                                <option value="draft">Draft</option>
+                                </option>
+                                <option value="published">Published</option>
+                            </select>
+                        </div>
+
+              =
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-white mb-2">Kategori *</label>
                                 @if ($Categories->count() > 0)
-                                <select name="category"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
-                                    <option value="">Pilih kategori</option>
-                                    @foreach ($Categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
+                                    <select name="category"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
+                                        <option value="">Pilih kategori</option>
+                                        @foreach ($Categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
                                 @else
-                                <select name="category"
-                                    class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
-                                    <option value="">Pilih kategori</option>
-                                        <option >Tidak ada kategori</option>
-                                </select>
-
+                                    <select name="category"
+                                        class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
+                                        <option value="">Pilih kategori</option>
+                                        <option>Tidak ada kategori</option>
+                                    </select>
                                 @endif
                             </div>
                         </div>
@@ -131,7 +140,8 @@
                         </div>
 
                         <!-- Editor Area -->
-                        <textarea name="content" placeholder="Tulis konten blog Anda di sini. Anda bisa menggunakan markdown atau HTML..." rows="15"
+                        <textarea name="content" placeholder="Tulis konten blog Anda di sini. Anda bisa menggunakan markdown atau HTML..."
+                            rows="15"
                             class="w-full bg-gray-800 border border-gray-700 border-t-0 rounded-b px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition resize-none font-mono text-sm"></textarea>
                         <p class="text-gray-500 text-xs mt-2">Mendukung Markdown dan HTML</p>
                     </div>

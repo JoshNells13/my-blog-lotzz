@@ -15,7 +15,11 @@ class BlogController extends Controller
 
         $CountBlogs = Blog::count();
 
-        return view('Admin.Blog.index', compact('Blogs','CountBlogs'));
+        $CountBlogPublished = Blog::where('status', 'published')->count();
+
+        $CountBlogDraft = Blog::where('status', 'draft')->count();
+
+        return view('Admin.Blog.index', compact('Blogs','CountBlogs','CountBlogPublished','CountBlogDraft'));
     }
 
     public function show($id)
@@ -38,6 +42,7 @@ class BlogController extends Controller
             'content' => 'required|string',
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:500',
+            'status' => 'required|in:draft,published',
         ]);
 
         Blog::create([
@@ -45,6 +50,7 @@ class BlogController extends Controller
             'content' => $request->input('content'),
             'description' => $request->input('description'),
             'id_category' => $request->input('category'),
+            'status' => $request->input('status'),
         ]);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
@@ -66,6 +72,7 @@ class BlogController extends Controller
             'content' => 'required|string',
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:500',
+            'status' => 'required|in:draft,published',
         ]);
 
         $blog = Blog::findOrFail($id);
