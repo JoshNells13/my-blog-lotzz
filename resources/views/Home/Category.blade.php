@@ -7,7 +7,7 @@
         <div class="mb-12">
             <div class="flex gap-3 flex-wrap">
                 <a href="{{ route('home') }}"
-                    class="px-4 py-2 bg-white text-gray-950 rounded text-sm font-medium transition-all hover:bg-gray-100">
+                    class="px-4 py-2 bg-gray-800 text-gray-300 rounded text-sm font-medium transition-all hover:bg-gray-700">
                     Semua
                 </a>
                 @if ($Categories->isNotEmpty())
