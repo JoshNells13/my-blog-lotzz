@@ -10,7 +10,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_category', 'title', 'slug', 'content', 'thumbnail'];
+    protected $fillable = ['id_category', 'title', 'slug', 'content', 'thumbnail', 'description'];
 
     public function category()
     {
@@ -22,7 +22,8 @@ class Blog extends Model
         return $this->hasMany(BlogImage::class, 'id_blog');
     }
 
-    public function setFieldNameAttribute($value){
+    public function setTitleAttribute($value)
+    {
         $this->attributes['title'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);
     }

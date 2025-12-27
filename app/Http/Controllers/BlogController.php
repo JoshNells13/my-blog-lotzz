@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,7 +13,9 @@ class BlogController extends Controller
 
         $Blogs = Blog::with('category')->get();
 
-        return view('Admin.Blog.index', compact('Blogs'));
+        $CountBlogs = Blog::count();
+
+        return view('Admin.Blog.index', compact('Blogs','CountBlogs'));
     }
 
     public function show($id)
@@ -22,7 +25,10 @@ class BlogController extends Controller
 
     public function create()
     {
-        return view('Admin.Blog.create');
+
+        $Categories = Category::all();
+
+        return view('Admin.Blog.create', compact('Categories'));
     }
 
     public function store(Request $request)
@@ -37,6 +43,7 @@ class BlogController extends Controller
         Blog::create([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
+            'description' => $request->input('description'),
             'id_category' => $request->input('category'),
         ]);
 
@@ -47,7 +54,9 @@ class BlogController extends Controller
     {
         $Blog = Blog::findOrFail($id);
 
-        return view('Admin.Blog.edit', compact('Blog'));
+        $Categories = Category::all();
+
+        return view('Admin.Blog.edit', compact('Blog', 'Categories'));
     }
 
     public function update(Request $request, $id)
@@ -60,9 +69,11 @@ class BlogController extends Controller
         ]);
 
         $blog = Blog::findOrFail($id);
+
         $blog->update([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
+            'description' => $request->input('description'),
             'id_category' => $request->input('category'),
         ]);
 

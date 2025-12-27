@@ -15,4 +15,4 @@
         <div class="flex items-center justify-between mb-6">
             <h2 class="text-4xl font-bold text-white">Selamat Datang Admin</h2>
         </div>
-    @endsection
+@endsection

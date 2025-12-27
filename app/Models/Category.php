@@ -18,9 +18,14 @@ class Category extends Model
         return $this->hasMany(Blog::class, 'id_category');
     }
 
-    public function setFieldNameAttribute($value)
+    public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function getCountCategoriesByBlogAttribute()
+    {
+        return $this->blogs()->count();
     }
 }

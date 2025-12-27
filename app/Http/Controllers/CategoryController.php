@@ -9,7 +9,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return view('Admin.Blog.index');
+        $Categories = Category::all();
+
+        $CountCategories = Category::count();
+
+        $CountCategoriesByBlog = Category::withCount('blogs')->get();
+
+        return view('Admin.Category.index', compact('Categories', 'CountCategories', 'CountCategoriesByBlog'));
     }
 
     public function show($id)
@@ -19,7 +25,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('categories.create');
+        return view('Admin.Category.create');
     }
 
     public function store(Request $request)
@@ -38,9 +44,9 @@ class CategoryController extends Controller
     }
     public function edit($id)
     {
-        $Category = Category::findOrFail($id);
+        $category = Category::findOrFail($id);
 
-        return view('Admin.Category.edit', compact('Category'));
+        return view('Admin.Category.edit', compact('category'));
     }
 
     public function update(Request $request, $id)

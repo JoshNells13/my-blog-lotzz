@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,6 +23,8 @@ Route::get('/categories/{slug}', [HomeController::class, 'showCategory'])->name(
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     //Bagian Admin Blog
     Route::prefix('/admin')->group(function () {
 
@@ -35,7 +39,7 @@ Route::middleware('auth')->group(function () {
         });
 
         //CRUD Category
-        Route::controller(BlogController::class)->group(function () {
+        Route::controller(CategoryController::class)->group(function () {
             Route::get('/categories', 'index')->name('admin.categories.index');
             Route::get('/categories/create', 'create')->name('admin.categories.create');
             Route::post('/categories', 'store')->name('admin.categories.store');
