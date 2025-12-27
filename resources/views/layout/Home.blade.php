@@ -22,7 +22,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="h-screen max-w-6xl mx-auto px-6 py-12">
+    <main class="min-h-screen max-w-6xl mx-auto px-6 py-12">
         @yield('content')
 
         {{-- <!-- Pagination -->
