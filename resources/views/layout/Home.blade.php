@@ -48,7 +48,7 @@
     <!-- Footer -->
     <footer class="border-t border-gray-800 mt-20 py-8">
         <div class="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
-            <p>© 2025 My Blog. Semua hak cipta dilindungi.</p>
+            <p>© {{ date('Y') }} LotzzBlog . Semua hak cipta dilindungi.</p>
         </div>
     </footer>
 </body>
