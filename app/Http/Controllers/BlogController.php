@@ -82,6 +82,7 @@ class BlogController extends Controller
             'content' => $request->input('content'),
             'description' => $request->input('description'),
             'id_category' => $request->input('category'),
+            'status' => $request->input('status'),
         ]);
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');

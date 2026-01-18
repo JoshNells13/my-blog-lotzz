@@ -32,6 +32,14 @@
                 <p class="text-gray-400 text-sm mb-1">Total Blog</p>
                 <p class="text-2xl font-bold text-white">{{ $CountBlogs }}</p>
             </div>
+            <div class="bg-gray-900 border border-gray-800 rounded p-4">
+                <p class="text-gray-400 text-sm mb-1">Total Blog Published</p>
+                <p class="text-2xl font-bold text-white">{{ $CountBlogPublished }}</p>
+            </div>
+            <div class="bg-gray-900 border border-gray-800 rounded p-4">
+                <p class="text-gray-400 text-sm mb-1">Total Blog Draft</p>
+                <p class="text-2xl font-bold text-white">{{ $CountBlogDraft }}</p>
+            </div>
         </div>
 
         <!-- Blog Table -->
@@ -44,6 +52,7 @@
                                 <input type="checkbox" class="rounded" id="selectAll">
                             </th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Judul</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Status</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Kategori</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Tanggal</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Aksi</th>
@@ -62,6 +71,15 @@
                                     <td class="px-6 py-4">
                                         <div class="font-medium text-white">{{ $Blog->title }}</div>
                                         <div class="text-gray-500 text-xs">{{ $Blog->slug }}</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if ($Blog->status === 'published')
+                                            <span
+                                                class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs font-medium">Published</span>
+                                        @else
+                                            <span
+                                                class="px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded text-xs font-medium">Draft</span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->category->name }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->created_at->format('d M Y') }}</td>
