@@ -14,7 +14,7 @@
         <article class="mb-16">
             <!-- Meta Info -->
             <div class="flex items-center gap-4 mb-6">
-                <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded text-sm font-medium">{{ $Blog->category->name }}</span>
+                <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded text-sm font-medium">{{ Str::headline(str_replace('-', ' ', $Blog->category->name)) }}</span>
                 <span class="text-gray-500 text-sm">{{ $Blog->created_at->format('Y M d') }}</span>
             </div>
 

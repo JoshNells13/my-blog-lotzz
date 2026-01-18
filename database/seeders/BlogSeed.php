@@ -3,22 +3,84 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class BlogSeed extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Blog::create([
-            'id_category' => 1,
-            'title' => 'Perjalanan Saya ikut LKS',
-            'description' => 'Pengalaman berharga saya saat mengikuti Lomba Kompetensi Siswa (LKS) di bidang teknologi informasi.',
-            'slug' => 'perjalanan-saya-ikut-lks',
-            'content' => 'Saya sangat bersemangat ketika pertama kali mendengar tentang Lomba Kompetensi Siswa (LKS). Sebagai seorang pelajar yang memiliki minat besar dalam bidang teknologi informasi, saya melihat ini sebagai kesempatan emas untuk menguji kemampuan saya dan belajar lebih banyak lagi.',
-        ]);
+        $blogs = [
+            [
+                'id_category' => 1,
+                'title' => 'Belajar Coding dari Nol',
+                'description' => 'Pengalaman belajar coding dari nol hingga memahami dasar pemrograman.',
+                'content' => 'Belajar coding dari nol bukan hal yang mudah, namun sangat mungkin dilakukan. Kunci utamanya adalah konsistensi, latihan rutin, dan tidak takut mencoba hal baru meskipun sering menemui error.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Mengapa Logic Lebih Penting dari Bahasa Pemrograman',
+                'description' => 'Memahami pentingnya logika dalam dunia pemrograman.',
+                'content' => 'Bahasa pemrograman bisa berubah, tetapi logika akan selalu dibutuhkan. Dengan logika yang baik, seorang programmer dapat mempelajari bahasa baru dengan lebih cepat dan efektif.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Pengalaman Pertama Membuat Website',
+                'description' => 'Cerita pertama kali membuat website sederhana.',
+                'content' => 'Website pertama saya dibuat menggunakan HTML dan CSS. Meski tampilannya sederhana, dari sini saya belajar struktur web, styling, dan bagaimana browser bekerja.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Laravel Membuat Coding Lebih Terstruktur',
+                'description' => 'Alasan Laravel menjadi framework favorit banyak developer.',
+                'content' => 'Laravel menyediakan struktur yang jelas, fitur lengkap, dan dokumentasi yang sangat membantu. Dengan Laravel, pengembangan aplikasi web menjadi lebih cepat dan terorganisir.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Pentingnya Version Control dengan Git',
+                'description' => 'Git sebagai alat wajib developer modern.',
+                'content' => 'Git membantu developer melacak perubahan kode, bekerja dalam tim, dan menghindari kehilangan data. Penguasaan Git adalah skill wajib di dunia industri.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Error adalah Guru Terbaik Programmer',
+                'description' => 'Belajar dari setiap error yang muncul.',
+                'content' => 'Setiap error memberikan pelajaran baru. Dengan membaca pesan error dan mencari solusinya, kemampuan problem solving programmer akan terus meningkat.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Belajar Backend Development',
+                'description' => 'Mengenal dunia backend dan server.',
+                'content' => 'Backend development berfokus pada logika aplikasi, database, dan server. Bahasa seperti PHP, Node.js, dan Python sering digunakan dalam pengembangan backend.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Database dalam Aplikasi Web',
+                'description' => 'Peran penting database dalam aplikasi.',
+                'content' => 'Database digunakan untuk menyimpan data secara terstruktur. MySQL, PostgreSQL, dan SQLite adalah contoh database yang sering digunakan dalam pengembangan web.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Belajar Coding untuk Karier Masa Depan',
+                'description' => 'Coding sebagai investasi skill jangka panjang.',
+                'content' => 'Di era digital, kemampuan coding membuka banyak peluang karier. Mulai dari web developer, mobile developer, hingga software engineer.',
+            ],
+            [
+                'id_category' => 1,
+                'title' => 'Konsistensi adalah Kunci Menjadi Programmer',
+                'description' => 'Tips menjaga konsistensi saat belajar coding.',
+                'content' => 'Belajar sedikit setiap hari jauh lebih efektif dibanding belajar banyak namun jarang. Konsistensi akan membentuk kebiasaan dan meningkatkan kemampuan secara bertahap.',
+            ],
+        ];
+
+        foreach ($blogs as $blog) {
+            Blog::create([
+                'id_category' => $blog['id_category'],
+                'title'       => $blog['title'],
+                'description' => $blog['description'],
+                'slug'        => Str::slug($blog['title']),
+                'content'     => $blog['content'],
+            ]);
+        }
     }
 }

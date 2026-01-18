@@ -14,8 +14,8 @@ class CategorySeed extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Events',
-            'slug' => 'events',
+            'name' => 'Programming',
+            'slug' => 'programming',
         ]);
     }
 }
