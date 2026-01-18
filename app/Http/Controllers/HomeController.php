@@ -11,13 +11,13 @@ class HomeController extends Controller
     public function index()
     {
 
-        $Blog= Blog::where('status','published')->latest()->paginate(6);
+        $Blog = Blog::where('status', 'published')->latest()->paginate(6);
 
 
-        $Categories= Category::all();
+        $Categories = Category::all();
 
 
-        return view('Home.index',compact('Blog','Categories'));
+        return view('Home.index', compact('Blog', 'Categories'));
     }
 
 
@@ -27,20 +27,20 @@ class HomeController extends Controller
     {
         $Blog = Blog::where('slug', $Slug)->first();
 
-        $Categories= Category::all();
+        $Categories = Category::all();
 
-        return view('Home.BlogDetail', compact('Blog','Categories'));
+        return view('Home.BlogDetail', compact('Blog', 'Categories'));
     }
 
     public function showCategory($Slug)
     {
         $Category = Category::where('slug', $Slug)->firstOrFail();
 
-        $Blogs = $Category->blogs()->where('status','published')->paginate(6);
+        $Blogs = $Category->blogs()->where('status', 'published')->paginate(6);
 
-        $Categories= Category::all();
+        $Categories = Category::all();
 
-        return view('Home.Category', compact('Blogs','Categories','Category'));
+        return view('Home.Category', compact('Blogs', 'Categories', 'Category'));
     }
 
 
@@ -48,11 +48,16 @@ class HomeController extends Controller
     {
         $query = $request->input('query');
 
-        $Blogs = Blog::where('title', 'like', '%' . $query . '%')
-            ->orWhere('content', 'like', '%' . $query . '%')
-            ->paginate(6);
+        $Blogs = Blog::where('status', 'published')
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                    ->orWhere('content', 'like', "%{$query}%");
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
 
-        $Categories= Category::all();
+        $Categories = Category::all();
 
         return view('Home.Search', compact('Blogs', 'Categories', 'query'));
     }
