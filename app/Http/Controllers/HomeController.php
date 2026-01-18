@@ -36,7 +36,8 @@ class HomeController extends Controller
     {
         $Category = Category::where('slug', $Slug)->firstOrFail();
 
-        $Blogs = $Category->blogs;
+        $Blogs = $Category->blogs()->where('status','published')->paginate(6);
+
         $Categories= Category::all();
 
         return view('Home.Category', compact('Blogs','Categories','Category'));
