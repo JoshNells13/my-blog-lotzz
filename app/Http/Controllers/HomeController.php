@@ -41,4 +41,18 @@ class HomeController extends Controller
 
         return view('Home.Category', compact('Blogs','Categories','Category'));
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $Blogs = Blog::where('title', 'like', '%' . $query . '%')
+            ->orWhere('content', 'like', '%' . $query . '%')
+            ->paginate(6);
+
+        $Categories= Category::all();
+
+        return view('Home.Search', compact('Blogs', 'Categories', 'query'));
+    }
 }

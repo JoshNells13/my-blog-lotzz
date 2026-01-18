@@ -35,8 +35,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- Card  -->
-        @if ($Blog->isNotEmpty())
-            @foreach ($Blog as $blog)
+        @if ($Blogs->isNotEmpty())
+            @foreach ($Blogs as $blog)
                 <article
                     class="bg-gray-900 rounded border border-gray-800 overflow-hidden hover:border-gray-700 transition-all hover:shadow-lg hover:shadow-gray-900/50 group">
                     {{-- <div <img src="{{ Storage::url($blog->thumbnail) }}" alt="Blog Image"
@@ -67,7 +67,7 @@
 
     </div>
     <div class="mt-4">
-        {{ $Blog->links('vendor.pagination.custom') }}
+        {{ $Blogs->links('vendor.pagination.custom') }}
 
     </div>
 @endsection

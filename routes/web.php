@@ -17,6 +17,7 @@ Route::post('/login', [AuthController::class, 'ProccessLogin'])->name('process.l
 //Home Route
 Route::get('/blogs/{slug}', [HomeController::class, 'showBlog'])->name('home.blog.show');
 Route::get('/categories/{slug}', [HomeController::class, 'showCategory'])->name('home.category.show');
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
 
 
 //Routes Autentikasi Untuk Admin
