@@ -12,7 +12,7 @@
             @if ($Categories->isNotEmpty())
                 @foreach ($Categories as $category)
                     <a href="{{ route('home.category.show', $category->slug) }}"
-                        class="px-4 py-2 bg-gray-800 text-gray-300 rounded text-sm font-medium transition-all hover:bg-gray-700">
+                        class="uppercase  px-4 py-2 bg-gray-800 text-gray-300 rounded text-sm font-medium transition-all hover:bg-gray-700">
                         {{ $category->name }}
                     </a>
                 @endforeach
