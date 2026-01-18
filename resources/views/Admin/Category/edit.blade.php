@@ -18,7 +18,7 @@
 
     <div class="p-8">
         <div class="max-w-4xl">
-            <form action="{{ route('admin.categories.update', $ategory->id) }}" method="POST" class="space-y-8">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="space-y-8">
                 @csrf
                 @method('PUT')
 

@@ -64,7 +64,6 @@
                                         <div class="text-gray-500 text-xs">{{ $Blog->slug }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->category->name }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->status }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->created_at->format('d M Y') }}</td>
                                     <td class="px-6 py-4 text-sm">
                                         <a href="{{ route('admin.blogs.edit', $Blog->id) }}"
