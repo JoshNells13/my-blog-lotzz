@@ -5,8 +5,6 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-use App\Models\Blog;
-use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,27 +25,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     //Bagian Admin Blog
-    Route::prefix('/admin')->group(function () {
+    Route::prefix('/admin')->name('admin.')->group(function () {
 
-        //CRUD Blog
-        Route::controller(BlogController::class)->group(function () {
-            Route::get('/blogs', 'index')->name('admin.blogs.index');
-            Route::get('/blogs/create', 'create')->name('admin.blogs.create');
-            Route::post('/blogs', 'store')->name('admin.blogs.store');
-            Route::get('/blogs/{id}/edit', 'edit')->name('admin.blogs.edit');
-            Route::put('/blogs/{id}', 'update')->name('admin.blogs.update');
-            Route::delete('/blogs/{id}', 'destroy')->name('admin.blogs.destroy');
-        });
+    //CRUD Blog
+     Route::resource('blogs', BlogController::class);
 
-        //CRUD Category
-        Route::controller(CategoryController::class)->group(function () {
-            Route::get('/categories', 'index')->name('admin.categories.index');
-            Route::get('/categories/create', 'create')->name('admin.categories.create');
-            Route::post('/categories', 'store')->name('admin.categories.store');
-            Route::get('/categories/{id}/edit', 'edit')->name('admin.categories.edit');
-            Route::put('/categories/{id}', 'update')->name('admin.categories.update');
-            Route::delete('/categories/{id}', 'destroy')->name('admin.categories.destroy');
-        });
+     //CRUD Category
+     Route::resource('categories', CategoryController::class);
+
 
     });
 });
