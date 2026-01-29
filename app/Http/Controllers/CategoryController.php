@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $Categories = Category::all();
+        $Categories = Category::latest()->paginate(10);
 
         $CountCategories = Category::count();
 

@@ -71,7 +71,7 @@
                                             class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit"
+                                            <button type="submit" onclick="return confirm('Yakin Ingin Menghapus Kategori ini?')"
                                                 class="bg-red-900/30 text-red-400 px-3 py-1 rounded text-xs font-medium">Delete</button>
                                         </form>
                                     </td>
@@ -91,8 +91,7 @@
 
 
         <div class="mt-4">
-            {{ $Categories>links('vendor.pagination.custom') }}
-
+            {{ $Categories->links('vendor.pagination.custom') }}
         </div>
         {{-- <!-- Pagination -->
         <div class="flex items-center justify-between mt-8">
