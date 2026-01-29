@@ -19,7 +19,7 @@
             </div>
 
             <!-- Title -->
-            <h1 class="text-5xl font-bold text-white mb-4 leading-tight">
+            <h1 class="text-5xl capitalize font-bold text-white mb-4 leading-tight">
                 {{ $Blog->title }}
             </h1>
 

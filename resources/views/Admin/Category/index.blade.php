@@ -53,8 +53,8 @@
 
                         @if ($Categories->count() > 0)
                             @foreach ($Categories as $Category)
-                                <tr class="hover:bg-gray-800/50 transition blog-row" data-category="{{ $Category->category }}"
-                                    data-status="{{ $Category->status }}">
+                                <tr class="hover:bg-gray-800/50 transition blog-row"
+                                    data-category="{{ $Category->category }}" data-status="{{ $Category->status }}">
                                     <td class="px-6 py-4">
                                         <input type="checkbox" class="rounded blog-checkbox">
                                     </td>
@@ -62,33 +62,38 @@
                                         <div class="font-medium text-white">{{ $Category->name }}</div>
                                         <div class="text-gray-500 text-xs">{{ $Category->slug }}</div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-400">{{ $Category->count_categories_by_blog }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-400">{{ $Category->count_categories_by_blog }}
+                                    </td>
                                     <td class="px-6 py-4 text-sm">
                                         <a href="{{ route('admin.categories.edit', $Category->id) }}"
                                             class="bg-green-900/30 text-green-400 px-3 py-1 rounded text-xs font-medium">Edit</a>
-                                            <form action="{{ route('admin.categories.destroy', $Category->id) }}" method="POST"
-                                                class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="bg-red-900/30 text-red-400 px-3 py-1 rounded text-xs font-medium">Delete</button>
-                                            </form>
+                                        <form action="{{ route('admin.categories.destroy', $Category->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-900/30 text-red-400 px-3 py-1 rounded text-xs font-medium">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
-                        <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                Tidak ada blog yang ditemukan.
-                            </td>
-                        </tr>
-
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                    Tidak ada blog yang ditemukan.
+                                </td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
             </div>
         </div>
 
+
+        <div class="mt-4">
+            {{ $Categories>links('vendor.pagination.custom') }}
+
+        </div>
         {{-- <!-- Pagination -->
         <div class="flex items-center justify-between mt-8">
             <p class="text-gray-400 text-sm">Menampilkan 1-5 dari 24 blog</p>

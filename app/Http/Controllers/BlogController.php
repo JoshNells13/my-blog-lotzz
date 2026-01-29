@@ -11,7 +11,7 @@ class BlogController extends Controller
     public function index()
     {
 
-        $Blogs = Blog::with('category')->get();
+        $Blogs = Blog::with('category')->latest()->paginate(10);
 
         $CountBlogs = Blog::count();
 

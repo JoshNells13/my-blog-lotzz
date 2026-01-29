@@ -63,8 +63,7 @@
 
                         @if ($Blogs->count() > 0)
                             @foreach ($Blogs as $Blog)
-                                <tr class="hover:bg-gray-800/50 transition blog-row"
-                                    >
+                                <tr class="hover:bg-gray-800/50 transition blog-row">
                                     <td class="px-6 py-4">
                                         <input type="checkbox" class="rounded blog-checkbox">
                                     </td>
@@ -82,31 +81,37 @@
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->category->name }}</td>
-                                    <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->created_at->format('d M Y') }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-400">{{ $Blog->created_at->format('d M Y') }}
+                                    </td>
                                     <td class="px-6 py-4 text-sm">
                                         <a href="{{ route('admin.blogs.edit', $Blog->id) }}"
                                             class="bg-green-900/30 text-green-400 px-3 py-1 rounded text-xs font-medium">Edit</a>
-                                            <form action="{{ route('admin.blogs.destroy', $Blog->id) }}" method="POST"
-                                                class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="bg-red-900/30 text-red-400 px-3 py-1 rounded text-xs font-medium">Delete</button>
-                                            </form>
+                                        <form action="{{ route('admin.blogs.destroy', $Blog->id) }}" method="POST"
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-900/30 text-red-400 px-3 py-1 rounded text-xs font-medium">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         @else
-                        <tr>
-                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                Tidak ada blog yang ditemukan.
-                            </td>
-                        </tr>
-
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                    Tidak ada blog yang ditemukan.
+                                </td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
             </div>
+        </div>
+
+
+        <div class="mt-4">
+            {{ $Blogs->links('vendor.pagination.custom') }}
+
         </div>
 
         {{-- <!-- Pagination -->
