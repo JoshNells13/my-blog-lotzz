@@ -51,12 +51,12 @@
                             <select name="status"
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white">
                                 <option value="draft">Draft</option>
-                                </option>
+
                                 <option value="published">Published</option>
                             </select>
                         </div>
 
-              =
+
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium text-white mb-2">Kategori *</label>
@@ -94,53 +94,54 @@
                         <label class="block text-sm font-medium text-white mb-3">Isi Blog *</label>
 
                         <!-- Editor Toolbar -->
-                        <div class="bg-gray-800 border border-gray-700 rounded-t flex items-center flex-wrap gap-1 p-2">
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bold">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 3a1 1 0 011 1v10a1 1 0 11-2 0V4a1 1 0 011-1h7a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Italic">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M6 4a1 1 0 011 1v10a1 1 0 11-2 0V5a1 1 0 011-1h8a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <div class="border-l border-gray-700 mx-1"></div>
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Heading">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 11-2 0V5H5v10h2a1 1 0 110 2H4a1 1 0 01-1-1V4z" />
-                                </svg>
-                            </button>
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bullet List">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Link">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M12.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.829.793-.792zM9.172 9.172a2 2 0 112.828 2.828l-.793.793 2.828 2.829-.793.792a2 2 0 11-2.828-2.828l.793-.793-2.828-2.829.793-.792z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                            <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Code">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
+                        <!-- <div class="bg-gray-800 border border-gray-700 rounded-t flex items-center flex-wrap gap-1 p-2">
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bold">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M6 3a1 1 0 011 1v10a1 1 0 11-2 0V4a1 1 0 011-1h7a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Italic">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M6 4a1 1 0 011 1v10a1 1 0 11-2 0V5a1 1 0 011-1h8a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div class="border-l border-gray-700 mx-1"></div>
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Heading">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 11-2 0V5H5v10h2a1 1 0 110 2H4a1 1 0 01-1-1V4z" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bullet List">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Link">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M12.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.829.793-.792zM9.172 9.172a2 2 0 112.828 2.828l-.793.793 2.828 2.829-.793.792a2 2 0 11-2.828-2.828l.793-.793-2.828-2.829.793-.792z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Code">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div> -->
 
                         <!-- Editor Area -->
-                        <textarea name="content" placeholder="Tulis konten blog Anda di sini. Anda bisa menggunakan markdown atau HTML..."
+                        <textarea name="content"
+                            placeholder="Tulis konten blog Anda di sini. Anda bisa menggunakan markdown atau HTML..."
                             rows="15"
                             class="w-full bg-gray-800 border border-gray-700 border-t-0 rounded-b px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition resize-none font-mono text-sm"></textarea>
                         <p class="text-gray-500 text-xs mt-2">Mendukung Markdown dan HTML</p>
