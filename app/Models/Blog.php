@@ -27,4 +27,13 @@ class Blog extends Model
         $this->attributes['title'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);
     }
+
+    public function getThumbnailUrlAttribute()
+    {
+        if (Str::startsWith($this->thumbnail, ['http://', 'https://'])) {
+            return $this->thumbnail;
+        }
+
+        return $this->thumbnail ? \Illuminate\Support\Facades\Storage::url($this->thumbnail) : null;
+    }
 }

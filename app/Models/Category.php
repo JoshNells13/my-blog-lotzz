@@ -24,6 +24,11 @@ class Category extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public function getCountCategoriesByBlogAttribute()
     {
         return $this->blogs()->count();
