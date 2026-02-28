@@ -2,56 +2,7 @@
 
 @section('content')
     <!-- Personal Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 mb-24" x-data="{ loaded: false }" x-init="setTimeout(() => loaded = true, 100)">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" x-show="loaded"
-            x-transition:enter="transition ease-out duration-1000" x-transition:enter-start="opacity-0 translate-y-10"
-            x-transition:enter-end="opacity-100 translate-y-0">
-            <div class="lg:col-span-8">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-white/10 mb-6">
-                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                    <span class="text-[10px] uppercase font-bold tracking-widest text-neutral-400">Coding, Designing &
-                        Sharing</span>
-                </div>
-                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]">
-                    <span class="text-white">Menulis tentang</span><br>
-                    <span class="text-gradient italic">Code & Creativity.</span>
-                </h1>
-                <p class="text-neutral-500 text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
-                    Halo, saya <span class="text-white font-semibold">Joshua</span>. Selamat datang di jurnal digital saya
-                    di mana saya berbagi eksplorasi seputar pengembangan web, UI/UX, dan teknologi masa kini.
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#articles"
-                        class="px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-neutral-100 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300">
-                        Baca Artikel
-                    </a>
-                    <a href="#"
-                        class="px-8 py-4 border border-white/10 rounded-full text-white font-bold hover:bg-white/5 transition-all duration-300">
-                        Tentang Saya
-                    </a>
-                </div>
-            </div>
-            <div class="lg:col-span-4 hidden lg:block">
-                <div class="relative group">
-                    <div
-                        class="absolute -inset-4 bg-gradient-to-r from-white/10 to-transparent blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-700">
-                    </div>
-                    <div
-                        class="w-full aspect-square glass rounded-[3rem] p-8 flex items-center justify-center relative overflow-hidden">
-                        <div
-                            class="grid grid-cols-2 gap-4 opacity-20 transform -rotate-12 transition-transform group-hover:rotate-0 duration-700">
-                            @foreach(range(1, 4) as $i)
-                                <div class="w-20 h-20 border border-white rounded-2xl"></div>
-                            @endforeach
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-9xl font-black text-white/5 select-none">J</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Main Content Layout -->
     <div id="articles" class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">

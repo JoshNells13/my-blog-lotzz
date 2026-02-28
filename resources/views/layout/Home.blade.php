@@ -118,15 +118,15 @@
                 <div class="max-w-sm">
                     <a href="/" class="flex items-center gap-3 mb-6">
                         <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                            <span class="text-black font-bold text-sm">J</span>
+                            <span class="text-black font-bold text-sm">L</span>
                         </div>
-                        <span class="text-white font-bold text-xl tracking-tight">Joshua<span class="text-neutral-500">.blog</span></span>
+                        <span class="text-white font-bold text-xl italic tracking-tight">Lotzz<span class="text-neutral-500">.blog</span></span>
                     </a>
                     <p class="text-neutral-500 leading-relaxed mb-8">
                         Berbagi pemikiran seputar pengembangan web modern, desain antarmuka, dan efisiensi teknologi.
                     </p>
                     <div class="flex gap-3">
-                        @foreach(['Twitter', 'GitHub', 'LinkedIn'] as $social)
+                        @foreach(['X', 'GitHub', 'LinkedIn'] as $social)
                             <a href="#" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-xs font-semibold text-neutral-400 hover:text-white transition-all duration-300">
                                 {{ $social }}
                             </a>
