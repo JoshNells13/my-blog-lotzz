@@ -1,7 +1,7 @@
 @extends('layout.Home')
 
 @section('content')
-    <!-- Personal Hero Section -->
+
 
 
     <!-- Main Content Layout -->

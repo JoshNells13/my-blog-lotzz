@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -19,7 +21,7 @@ class BlogController extends Controller
 
         $CountBlogDraft = Blog::where('status', 'draft')->count();
 
-        return view('Admin.Blog.index', compact('Blogs','CountBlogs','CountBlogPublished','CountBlogDraft'));
+        return view('Admin.Blog.index', compact('Blogs', 'CountBlogs', 'CountBlogPublished', 'CountBlogDraft'));
     }
 
     public function show($id)
@@ -43,15 +45,27 @@ class BlogController extends Controller
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:500',
             'status' => 'required|in:draft,published',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Blog::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'description' => $request->input('description'),
-            'id_category' => $request->input('category'),
-            'status' => $request->input('status'),
-        ]);
+        $thumbnailPath = null;
+        try {
+            if ($request->hasFile('thumbnail')) {
+                $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+            }
+
+            Blog::create([
+                'title' => $request->input('title'),
+                'content' => $request->input('content'),
+                'description' => $request->input('description'),
+                'id_category' => $request->input('category'),
+                'status' => $request->input('status'),
+                'thumbnail' => $thumbnailPath,
+            ]);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Blog creation failed: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'Gagal menyimpan blog. Silakan coba lagi.']);
+        }
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog created successfully');
 
@@ -73,17 +87,33 @@ class BlogController extends Controller
             'category' => 'required|exists:categories,id',
             'description' => 'required|string|max:500',
             'status' => 'required|in:draft,published',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $blog = Blog::findOrFail($id);
 
-        $blog->update([
+        $data = [
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'description' => $request->input('description'),
             'id_category' => $request->input('category'),
             'status' => $request->input('status'),
-        ]);
+        ];
+
+        try {
+            if ($request->hasFile('thumbnail')) {
+                // Delete old thumbnail if it exists locally
+                if ($blog->thumbnail && !\Illuminate\Support\Str::startsWith($blog->thumbnail, ['http://', 'https://'])) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($blog->thumbnail);
+                }
+                $data['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+            }
+
+            $blog->update($data);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Blog update failed: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'Gagal memperbarui blog. Silakan coba lagi.']);
+        }
 
         return redirect()->route('admin.blogs.index')->with('success', 'Blog updated successfully');
     }

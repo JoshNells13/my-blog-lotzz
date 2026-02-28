@@ -18,7 +18,7 @@
     <div class="p-8">
         <div class="max-w-4xl">
             <!-- Form Container -->
-            <form action="{{ route('admin.blogs.store') }}" method="POST" class="space-y-8">
+            <form action="{{ route('admin.blogs.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
                 @csrf
                 <!-- Basic Info Section -->
                 <div class="bg-gray-900 border border-gray-800 rounded-lg p-6">
@@ -34,26 +34,48 @@
                         <!-- Judul -->
                         <div>
                             <label class="block text-sm font-medium text-white mb-2">Judul Blog *</label>
-                            <input name="title" type="text" placeholder="Masukkan judul blog yang menarik..."
+                            <input name="title" type="text" value="{{ old('title') }}"
+                                placeholder="Masukkan judul blog yang menarik..."
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition">
+                            @error('title')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                             <p class="text-gray-500 text-xs mt-2">Minimal 10 karakter</p>
                         </div>
 
                         <!-- Deskripsi -->
                         <div>
                             <label class="block text-sm font-medium text-white mb-2">Deskripsi *</label>
-                            <input name="description" type="text" placeholder="Deskripsi singkat tentang blog Anda..."
+                            <input name="description" type="text" value="{{ old('description') }}"
+                                placeholder="Deskripsi singkat tentang blog Anda..."
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition">
+                            @error('description')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Thumbnail -->
+                        <div>
+                            <label class="block text-sm font-medium text-white mb-2">Thumbnail Blog *</label>
+                            <input name="thumbnail" type="file"
+                                class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition">
+                            <p class="text-gray-500 text-xs mt-2">Format: JPG, PNG, GIF, SVG (Maks. 2MB)</p>
+                            @error('thumbnail')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-sm text-white mb-2">Status *</label>
                             <select name="status"
                                 class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-white">
-                                <option value="draft">Draft</option>
-
-                                <option value="published">Published</option>
+                                <option value="draft" {{ old('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+                                <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published
+                                </option>
                             </select>
+                            @error('status')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
 
@@ -65,9 +87,12 @@
                                         class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
                                         <option value="">Pilih kategori</option>
                                         @foreach ($Categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('category')
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                    @enderror
                                 @else
                                     <select name="category"
                                         class="w-full bg-gray-800 border border-gray-700 rounded px-4 py-3 text-gray-100 focus:outline-none focus:border-white transition">
@@ -95,55 +120,58 @@
 
                         <!-- Editor Toolbar -->
                         <!-- <div class="bg-gray-800 border border-gray-700 rounded-t flex items-center flex-wrap gap-1 p-2">
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bold">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M6 3a1 1 0 011 1v10a1 1 0 11-2 0V4a1 1 0 011-1h7a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Italic">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M6 4a1 1 0 011 1v10a1 1 0 11-2 0V5a1 1 0 011-1h8a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <div class="border-l border-gray-700 mx-1"></div>
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Heading">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path
-                                            d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 11-2 0V5H5v10h2a1 1 0 110 2H4a1 1 0 01-1-1V4z" />
-                                    </svg>
-                                </button>
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bullet List">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Link">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M12.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.829.793-.792zM9.172 9.172a2 2 0 112.828 2.828l-.793.793 2.828 2.829-.793.792a2 2 0 11-2.828-2.828l.793-.793-2.828-2.829.793-.792z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Code">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div> -->
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bold">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 3a1 1 0 011 1v10a1 1 0 11-2 0V4a1 1 0 011-1h7a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Italic">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M6 4a1 1 0 011 1v10a1 1 0 11-2 0V5a1 1 0 011-1h8a1 1 0 011 1v3a1 1 0 11-2 0V4H6z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <div class="border-l border-gray-700 mx-1"></div>
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Heading">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 11-2 0V5H5v10h2a1 1 0 110 2H4a1 1 0 01-1-1V4z" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Bullet List">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Link">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M12.586 4.586a2 2 0 112.828 2.828l-.793.793-2.828-2.829.793-.792zM9.172 9.172a2 2 0 112.828 2.828l-.793.793 2.828 2.829-.793.792a2 2 0 11-2.828-2.828l.793-.793-2.828-2.829.793-.792z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="p-2 rounded hover:bg-gray-700 transition" title="Code">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </div> -->
 
                         <!-- Editor Area -->
                         <textarea name="content"
                             placeholder="Tulis konten blog Anda di sini. Anda bisa menggunakan markdown atau HTML..."
                             rows="15"
-                            class="w-full bg-gray-800 border border-gray-700 border-t-0 rounded-b px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition resize-none font-mono text-sm"></textarea>
+                            class="w-full bg-gray-800 border border-gray-700 border-t-0 rounded-b px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition resize-none font-mono text-sm">{{ old('content') }}</textarea>
+                        @error('content')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                         <p class="text-gray-500 text-xs mt-2">Mendukung Markdown dan HTML</p>
                     </div>
                 </div>

@@ -10,7 +10,8 @@
             </div>
             <div class="flex items-center gap-4">
                 {{-- <input type="text" placeholder="Search blog..." id="searchInput"
-                    class="bg-gray-800 border border-gray-700 rounded px-4 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition"> --}}
+                    class="bg-gray-800 border border-gray-700 rounded px-4 py-2 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-white transition">
+                --}}
                 <a href="{{ route('admin.blogs.create') }}"
                     class="bg-white text-gray-950 px-4 py-2 rounded font-medium hover:bg-gray-100 transition flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,6 +52,7 @@
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">
                                 <input type="checkbox" class="rounded" id="selectAll">
                             </th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Thumbnail</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Judul</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Status</th>
                             <th class="px-6 py-4 text-left text-sm font-semibold text-gray-300">Kategori</th>
@@ -66,6 +68,20 @@
                                 <tr class="hover:bg-gray-800/50 transition blog-row">
                                     <td class="px-6 py-4">
                                         <input type="checkbox" class="rounded blog-checkbox">
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div
+                                            class="w-16 h-10 rounded overflow-hidden border border-gray-800 bg-gray-800 flex items-center justify-center">
+                                            @if ($Blog->thumbnail)
+                                                <img src="{{ $Blog->thumbnail_url }}" alt="" class="w-full h-full object-cover">
+                                            @else
+                                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            @endif
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="font-medium text-white">{{ $Blog->title }}</div>
@@ -86,8 +102,7 @@
                                     <td class="px-6 py-4 text-sm">
                                         <a href="{{ route('admin.blogs.edit', $Blog->id) }}"
                                             class="bg-green-900/30 text-green-400 px-3 py-1 rounded text-xs font-medium">Edit</a>
-                                        <form action="{{ route('admin.blogs.destroy', $Blog->id) }}" method="POST"
-                                            class="inline">
+                                        <form action="{{ route('admin.blogs.destroy', $Blog->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('Yakin Ingin Menghapus Blog ini?')"
@@ -123,8 +138,7 @@
                 <button class="px-3 py-2 rounded bg-white text-gray-950 font-medium text-sm">1</button>
                 <button class="px-3 py-2 rounded bg-gray-800 text-gray-400 hover:bg-gray-700 transition text-sm">2</button>
                 <button class="px-3 py-2 rounded bg-gray-800 text-gray-400 hover:bg-gray-700 transition text-sm">3</button>
-                <button
-                    class="px-3 py-2 rounded bg-gray-800 text-gray-400 hover:bg-gray-700 transition text-sm">Selanjutnya
+                <button class="px-3 py-2 rounded bg-gray-800 text-gray-400 hover:bg-gray-700 transition text-sm">Selanjutnya
                     →</button>
             </div>
         </div> --}}
